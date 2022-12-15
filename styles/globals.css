@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+@layer base {
+	body {
+		@apply bg-gray-100 font-Quicksand overflow-x-hidden;
+	}
+
+	body::-webkit-scrollbar {
+		@apply w-1 h-1;
+	}
+
+	body::-webkit-scrollbar-thumb {
+		@apply bg-sky-600;
+	}
+
+	body::-webkit-scrollbar-track {
+		@apply bg-gray-300;
+	}
+}
+
+@layer components {
+	.auth-form {
+		@apply absolute w-full md:w-[30rem] top-[calc(50%-222.5px)] md:left-[calc(50%-15rem)] p-4 bg-gray-100 md:bg-white md:shadow-lg font-medium select-none;
+	}
+
+	.form-group {
+		@apply mb-6 flex flex-col gap-2;
+	}
+
+	.form-label {
+		@apply text-sm group-focus-within:text-sky-500;
+	}
+
+	.form-input {
+		@apply px-4 py-3 text-sm outline-none border bg-gray-200 focus-within:bg-gray-300 focus-within:border-sky-400;
+	}
+
+	.form-note {
+		@apply text-[11px] text-gray-700;
+	}
+
+	.form-button {
+		@apply relative h-full w-full flex items-center justify-center font-semibold text-white bg-sky-500 hover:bg-sky-600 disabled:bg-gray-200;
+	}
+
+	.form-footer {
+		@apply flex gap-2 items-center justify-center text-sm;
+	}
+
+	.text-wrap-3 {
+		@apply text-ellipsis overflow-hidden leading-7 max-h-[5.25rem];
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+	}
+}
