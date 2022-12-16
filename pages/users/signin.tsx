@@ -78,7 +78,7 @@ const SignInPage: NextPage = () => {
 			</div>
 			<div className='form-footer'>
 				Don&apos;t have an account?{" "}
-				<Link href='/users/signin' className='text-sky-600'>
+				<Link href='/users/signup' className='text-sky-600'>
 					Sign Up here
 				</Link>
 			</div>
