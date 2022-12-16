@@ -57,4 +57,33 @@
 		-webkit-line-clamp: 3;
 		-webkit-box-orient: vertical;
 	}
+
+	.create-grid-form {
+		@apply grid-cols-4;
+		grid-template-rows: repeat(9, minmax(0, 1fr));
+	}
+
+	.recipe-name-area {
+		grid-row: 1 / 1;
+		grid-column: 1 / 3;
+	}
+
+	.recipe-tags-area {
+		grid-row: 1 / 1;
+		grid-column: 3 / 5;
+	}
+
+	.recipe-content-area {
+		grid-row: 2 / span 7;
+		grid-column: 1 / span 4;
+	}
+
+	.recipe-submit-area {
+		grid-row: 9 / 9;
+		grid-column: 2 / 4;
+	}
+
+	.tags {
+		@apply px-5 rounded-xl py-1 text-sm bg-black text-white flex items-center justify-center relative after:block after:w-1 after:h-1 after:rounded-full after:bg-white after:absolute after:left-2;
+	}
 }

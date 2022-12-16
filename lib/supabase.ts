@@ -18,7 +18,9 @@ export const signIn = async (email: string, password: string) => {
 	return data;
 };
 
-export const createRecipe = async (recipe: Recipe) => {
+export const createRecipe = async (
+	recipe: Omit<Recipe, "id" | "created_at">
+) => {
 	const { data, error } = await supabase.from("recipes").insert({ ...recipe });
 	if (error) throw error;
 	return data;
@@ -26,6 +28,15 @@ export const createRecipe = async (recipe: Recipe) => {
 
 export const getRecipes = async () => {
 	const { data, error } = await supabase.from("recipes").select("*");
+	if (error) throw error;
+	return data;
+};
+
+export const getOneRecipe = async (id: string) => {
+	const { data, error } = await supabase
+		.from("recipes")
+		.select("*")
+		.eq("id", id);
 	if (error) throw error;
 	return data;
 };

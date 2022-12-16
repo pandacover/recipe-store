@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Router from "next/router";
+import Head from "next/head";
 import type { NextPage } from "next";
 import { signIn } from "../../lib/supabase";
 import { Spinner } from "../../components/UI";
@@ -15,17 +16,25 @@ const SignInPage: NextPage = () => {
 		e.preventDefault();
 		setLoading(true);
 		signIn(email, password)
-			.then(() => Router.push("/explore"))
+			.then(() => Router.push("/recipes"))
 			.catch((error) => console.error(error))
 			.finally(() => setLoading(false));
 	};
 
 	useEffect(() => {
-		if (session) Router.push("/explore");
+		if (session) Router.push("/recipes");
 	}, [session]);
 
 	return (
 		<form className='auth-form' onSubmit={onSignIn}>
+			<Head>
+				<title>Recipe Store | Sign In</title>
+				<meta
+					name='description'
+					content='Login existing user for Recipe Store.'
+				/>
+				<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+			</Head>
 			<div className='form-group'>
 				<div className='text-3xl font-semibold'>Welcome back</div>
 				<div className='text-sm'>Login to your account</div>

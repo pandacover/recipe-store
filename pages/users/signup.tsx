@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Router from "next/router";
+import Head from "next/head";
 import type { NextPage } from "next";
 import { FormEvent, useEffect, useState } from "react";
 import { signUp } from "../../lib/supabase";
@@ -15,17 +16,25 @@ const SignUpPage: NextPage = () => {
 		e.preventDefault();
 		setLoading(true);
 		signUp(email, password)
-			.then(() => Router.push("/explore"))
+			.then(() => Router.push("/recipes"))
 			.catch((error) => console.error(error))
 			.finally(() => setLoading(false));
 	};
 
 	useEffect(() => {
-		if (session) Router.push("/explore");
+		if (session) Router.push("/recipes");
 	}, [session]);
 
 	return (
 		<form className='auth-form' onSubmit={onSignUp}>
+			<Head>
+				<title>Recipe Store | Sign Up</title>
+				<meta
+					name='description'
+					content='Create a new user for Recipe Store.'
+				/>
+				<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+			</Head>
 			<div className='form-group'>
 				<div className='text-3xl font-semibold'>Get started</div>
 				<div className='text-sm'>Create a new account</div>
