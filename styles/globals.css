@@ -6,7 +6,7 @@
 
 @layer base {
 	body {
-		@apply bg-gray-100 font-Quicksand overflow-x-hidden;
+		@apply bg-gray-50 font-Quicksand overflow-x-hidden;
 	}
 
 	body::-webkit-scrollbar {
@@ -24,7 +24,7 @@
 
 @layer components {
 	.auth-form {
-		@apply absolute w-full md:w-[30rem] top-[calc(50%-222.5px)] md:left-[calc(50%-15rem)] p-4 bg-gray-100 md:bg-white md:shadow-lg font-medium select-none;
+		@apply p-4 absolute w-full md:w-[30rem] top-[calc(50%-222.5px)] md:left-[calc(50%-15rem)] font-medium select-none md:shadow-lg shadow-gray-300 dark:shadow-[#040404];
 	}
 
 	.form-group {
@@ -32,19 +32,19 @@
 	}
 
 	.form-label {
-		@apply text-sm group-focus-within:text-sky-500;
+		@apply text-xs;
 	}
 
 	.form-input {
-		@apply px-4 py-3 text-sm outline-none border bg-gray-200 focus-within:bg-gray-300 focus-within:border-sky-400;
+		@apply px-4 py-3 text-sm outline-none bg-gray-200 border-b border-transparent focus-within:border-sky-500 dark:bg-black3 dark:focus-within:border-sky-700;
 	}
 
 	.form-note {
-		@apply text-[11px] text-gray-700;
+		@apply text-[11px] text-gray-700 dark:text-gray-500;
 	}
 
 	.form-button {
-		@apply relative h-full w-full flex items-center justify-center font-semibold text-white bg-sky-500 hover:bg-sky-600 disabled:bg-gray-200;
+		@apply relative h-full w-full mx-auto flex items-center justify-center font-semibold bg-sky-500 hover:bg-sky-600 text-white dark:text-gray-200 dark:bg-sky-800 dark:hover:bg-sky-700;
 	}
 
 	.form-footer {

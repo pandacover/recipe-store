@@ -36,10 +36,10 @@ const SignInPage: NextPage = () => {
 				<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
 			</Head>
 			<div className='form-group'>
-				<div className='text-3xl font-semibold'>Welcome back</div>
-				<div className='text-sm'>Login to your account</div>
+				<div className='text-2xl font-semibold'>Welcome back</div>
+				<div>Login to your account</div>
 			</div>
-			<div className='form-group group'>
+			<div className='form-group'>
 				<label htmlFor='usermail' className='form-label'>
 					Email
 				</label>
@@ -55,7 +55,7 @@ const SignInPage: NextPage = () => {
 				/>
 				<div className='form-note'>Email is required *</div>
 			</div>
-			<div className='form-group group'>
+			<div className='form-group'>
 				<label htmlFor='password' className='form-label'>
 					Password
 				</label>

@@ -5,6 +5,7 @@ import { Session } from "@supabase/supabase-js";
 import { RiHeartFill } from "react-icons/ri";
 import { ReactNode, useState, useEffect, useMemo } from "react";
 import { SessionContext } from "../../../lib/session.context";
+import Navbar from "./navbar";
 
 type componentProps = {
 	children: ReactNode;
@@ -13,8 +14,11 @@ type componentProps = {
 export default function Layout({ children }: componentProps) {
 	return (
 		<SessionProvider>
-			<div className='max-w-[1368px] w-screen min-h-screen mx-auto relative pb-12'>
-				{children}
+			<div className='max-w-[1368px] w-screen min-h-screen mx-auto relative pb-12 flex flex-col dark:bg-black1 dark:text-gray-200'>
+				<header className='basis-[4rem] flex items-center px-4'>
+					<Navbar />
+				</header>
+				<main className='w-full relative flex-auto'>{children}</main>
 				<footer className='absolute bottom-4 left-0 w-full px-2 flex items-center justify-center h-4'>
 					Made with
 					<span className='mx-2 text-red-600'>

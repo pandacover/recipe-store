@@ -4,7 +4,7 @@ import type { GetServerSidePropsContext, NextPage } from "next";
 
 const RecipePage: NextPage<{ recipe: Recipe }> = ({ recipe }) => {
 	return (
-		<div className='w-11/12 mx-auto pt-4'>
+		<div className='w-full px-4 pt-4'>
 			<Head>
 				<title>{`Recipe Store | ${recipe.name}`}</title>
 				<meta name='description' content={recipe.content} />
@@ -18,8 +18,8 @@ const RecipePage: NextPage<{ recipe: Recipe }> = ({ recipe }) => {
 					</span>
 				))}
 			</div>
-			<div className='prose prose-lg min-w-full'>
-				<pre className='w-full whitespace-pre-wrap font-Quicksand'>
+			<div className='min-w-full'>
+				<pre className='w-full whitespace-pre-wrap font-Quicksand font-medium'>
 					{recipe.content}
 				</pre>
 			</div>

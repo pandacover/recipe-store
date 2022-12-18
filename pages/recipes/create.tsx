@@ -4,8 +4,10 @@ import type { NextPage } from "next";
 import { createRecipe } from "../../lib/supabase";
 import type { FormEvent, ChangeEvent } from "react";
 import { Spinner } from "../../components/UI";
+import { useSessionContext } from "../../lib/session.context";
 
 const CreatePage: NextPage = () => {
+	const { session } = useSessionContext();
 	const [recipe, setRecipe] = useState({
 		name: "",
 		content: "",
@@ -16,8 +18,12 @@ const CreatePage: NextPage = () => {
 
 	const onSubmitRecipe = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		if (!session) return;
 		setLoading(true);
-		createRecipe(recipe)
+		createRecipe({
+			...recipe,
+			author: session.user?.email?.split("@")[0] || "",
+		})
 			.then((data) => console.log(data))
 			.catch((err) => console.error(err))
 			.finally(() => setLoading(false));
