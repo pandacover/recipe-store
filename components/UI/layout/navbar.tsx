@@ -29,7 +29,7 @@ export default function Navbar() {
 					{(session && session.user.email?.split("@")[0]) || "Recipe Store"}
 				</Link>
 			</div>
-			<nav className='flex-[2] flex items-center justify-end'>
+			<nav className='flex-[2] flex items-center justify-end select-none'>
 				<div className='w-20 h-8 relative bg-transparent'>
 					<button
 						className='w-full h-full text-lg flex relative z-20 dark:text-white transition-colors duration-700'
