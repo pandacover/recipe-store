@@ -42,7 +42,7 @@ export default function Navbar() {
 							<HiMoon />
 						</div>
 					</button>
-					<div className='w-10 h-8 rounded-l-2xl z-10 bg-yellow-300 absolute top-0 left-0 dark:bg-purple-600 dark:rounded-l-none dark:rounded-r-2xl dark:translate-x-[100%] transition-all duration-500' />
+					<div className='w-10 h-8 rounded-l-2xl z-10 bg-yellow-300 absolute top-0 left-0 dark:bg-purple-600 dark:rounded-l-none dark:rounded-r-2xl dark:translate-x-[100%] transition-[translate] translate-colors duration-500' />
 				</div>
 			</nav>
 		</>
