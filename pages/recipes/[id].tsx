@@ -8,7 +8,7 @@ const RecipePage: NextPage<{ recipe: Recipe }> = ({ recipe }) => {
 			<Head>
 				<title>{`Recipe Store | ${recipe.name}`}</title>
 				<meta name='description' content={recipe.content} />
-				<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+				<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 			</Head>
 			<div className='text-2xl font-bold text-sky-600 mb-2'>{recipe.name}</div>
 			<div className='flex gap-2 mb-6'>

@@ -33,7 +33,7 @@ const SignInPage: NextPage = () => {
 					name='description'
 					content='Login existing user for Recipe Store.'
 				/>
-				<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+				<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 			</Head>
 			<div className='form-group'>
 				<div className='text-2xl font-semibold'>Welcome back</div>

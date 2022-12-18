@@ -14,8 +14,8 @@ type componentProps = {
 export default function Layout({ children }: componentProps) {
 	return (
 		<SessionProvider>
-			<div className='max-w-[1368px] w-screen min-h-screen mx-auto relative pb-12 flex flex-col dark:bg-black1 dark:text-gray-200'>
-				<header className='basis-[4rem] flex items-center px-4'>
+			<div className='max-w-[1368px] w-screen min-h-screen mx-auto relative flex flex-col pb-16 dark:bg-black1 dark:text-gray-200'>
+				<header className='basis-[4rem] px-4 flex items-center'>
 					<Navbar />
 				</header>
 				<main className='w-full relative flex-auto'>{children}</main>

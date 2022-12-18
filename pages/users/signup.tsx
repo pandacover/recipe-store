@@ -33,7 +33,7 @@ const SignUpPage: NextPage = () => {
 					name='description'
 					content='Create a new user for Recipe Store.'
 				/>
-				<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+				<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 			</Head>
 			<div className='form-group'>
 				<div className='text-3xl font-semibold'>Get started</div>

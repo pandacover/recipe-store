@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import { MdOutlineClose } from "react-icons/md";
 import { getRecipes } from "../../lib/supabase";
 import { useSessionContext } from "../../lib/session.context";
+import Image from "next/image";
 
 const RecipesPage: NextPage<{ recipes: Recipe[] }> = ({ recipes }) => {
 	const { session } = useSessionContext();
@@ -32,41 +33,43 @@ const RecipesPage: NextPage<{ recipes: Recipe[] }> = ({ recipes }) => {
 						name='description'
 						content='All the recipes for Recipe Store.'
 					/>
-					<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+					<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 				</Head>
 
-				<div className='flex flex-col h-full px-4'>
+				<div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 h-full px-4 gap-4'>
 					{recipes &&
 						recipes.map(({ name, id, created_at, author }) => (
-							<div
+							<Link
+								href={`/recipes/${id}`}
 								key={id}
-								className='grid grid-cols-4 gap-2 py-4 border-b border-b-300 dark:border-black6 last-of-type:border-transparent dark:last-of-type:border-transparent'
+								className='relative aspect-square block shadow-lg shadow-gray-300 dark:shadow-black'
 							>
-								<div className='col-span-2 text-ellipsis whitespace-nowrap overflow-hidden font-medium text-sky-500 dark:text-sky-700'>
-									<Link
-										href={`/recipes/${id}`}
-										className='hover:underline'
+								<div className='absolute left-0 top-0 w-full h-full z-10'>
+									<Image
+										src='/assets/recipe-fallback.svg'
+										alt='Recipe Image'
+										className='px-2'
+										fill={true}
+									/>
+								</div>
+								<div className='relative z-20 p-2 bg-gray-100/70 dark:bg-black2/50 backdrop-blur w-full h-full flex flex-col justify-end gap-2'>
+									<div
+										className='mb-auto text-3xl font-bold block text-ellipsis whitespace-nowrap overflow-hidden'
 										title={name}
 									>
 										{name}
-									</Link>
+									</div>
+									<div className='capitalize font-medium' title={author}>
+										Chef {author}
+									</div>
+									<div className='text-sm' title={created_at}>
+										{new Date(created_at).toLocaleDateString(
+											"en-US",
+											dateOptions
+										)}
+									</div>
 								</div>
-								<div
-									className='col-span-1 overflow-hidden text-ellipsis whitespace-nowrap'
-									title={author}
-								>
-									{author}
-								</div>
-								<div
-									className='col-spab-1 overflow-hidden text-ellipsis whitespace-nowrap'
-									title={created_at}
-								>
-									{new Date(created_at).toLocaleDateString(
-										"en-US",
-										dateOptions
-									)}
-								</div>
-							</div>
+							</Link>
 						))}
 				</div>
 			</div>

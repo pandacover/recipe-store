@@ -49,7 +49,7 @@ const CreatePage: NextPage = () => {
 					name='description'
 					content={`Create the recipe for Recipe Store.`}
 				/>
-				<meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+				<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 			</Head>
 			<div className='flex h-11 mb-4 items-center justify-center font-semibold text-2xl'>
 				🍚 Note your recipe down 🍳

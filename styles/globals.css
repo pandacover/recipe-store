@@ -86,4 +86,33 @@
 	.tags {
 		@apply px-5 rounded-xl py-1 text-sm bg-black text-white flex items-center justify-center relative after:block after:w-1 after:h-1 after:rounded-full after:bg-white after:absolute after:left-2;
 	}
+
+	.theme-button {
+		/* z-index: 100; */
+		animation-duration: 500ms;
+		animation-direction: reverse;
+		animation-fill-mode: forwards;
+		animation-name: bridgeTransition;
+		animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.dark .theme-button {
+		animation-direction: normal;
+	}
+}
+
+@keyframes bridgeTransition {
+	0% {
+		border-radius: 1rem 0 0 1rem;
+		transform: translateX(0%);
+	}
+
+	50% {
+		border-radius: 1rem 1rem 1rem 1rem;
+	}
+
+	100% {
+		border-radius: 0 1rem 1rem 0;
+		transform: translateX(100%);
+	}
 }
