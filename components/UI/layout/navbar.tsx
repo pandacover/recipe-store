@@ -47,7 +47,7 @@ export default function Navbar() {
 				)}
 			</nav>
 			<div className='flex-1 h-full flex items-center justify-end select-none gap-4'>
-				{!authRoutes.includes(Router.asPath) && (
+				{!authRoutes.includes(Router.asPath) && Router.asPath !== "/" && (
 					<div>
 						<button className='text-[2.5vmin]' onClick={onToggleSearch}>
 							Search

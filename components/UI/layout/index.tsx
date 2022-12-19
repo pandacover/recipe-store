@@ -41,7 +41,8 @@ const SessionProvider = ({ children }: componentProps) => {
 	const authRouters = useMemo(() => ["/users/signin", "/users/signup"], []);
 
 	useEffect(() => {
-		if (authRouters.includes(Router.asPath) || session) return;
+		if (authRouters.includes(Router.asPath) || session || Router.asPath === "/")
+			return;
 		setLoading(true);
 		supabase.auth
 			.getSession()
