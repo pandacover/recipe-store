@@ -1,28 +1,28 @@
 import Link from "next/link";
-import { useState } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { MdOutlineClose } from "react-icons/md";
 import { getRecipes } from "../../lib/supabase";
-import { useSessionContext } from "../../lib/session.context";
 import Image from "next/image";
+import { useRecipeContext } from "../../lib/recipe.context";
+import { useEffect } from "react";
+import { Spinner } from "../../components/UI";
 
-const RecipesPage: NextPage<{ recipes: Recipe[] }> = ({ recipes }) => {
-	const { session } = useSessionContext();
-	const [searchParams, setSearchParams] = useState("");
+const RecipesPage: NextPage = () => {
 	const dateOptions: { [key: string]: string } = {
 		year: "numeric",
 		month: "short",
 		day: "numeric",
 	};
 
-	const checkParams = (name: string, tags: string[]) => {
-		return (
-			searchParams.length <= 0 ||
-			name.toLowerCase().includes(searchParams.toLowerCase()) ||
-			tags.some((tag) => tag.toLowerCase().includes(searchParams.toLowerCase()))
-		);
-	};
+	const { recipes, setRecipes } = useRecipeContext();
+
+	useEffect(() => {
+		getRecipes()
+			.then((data) => setRecipes(data))
+			.catch((err) => console.log(err));
+	}, [setRecipes]);
+
+	if (!recipes) return <Spinner />;
 
 	return (
 		<div className='absolute left-0 top-0 w-full h-full'>
@@ -75,15 +75,6 @@ const RecipesPage: NextPage<{ recipes: Recipe[] }> = ({ recipes }) => {
 			</div>
 		</div>
 	);
-};
-
-export const getServerSideProps = async () => {
-	const recipes = await getRecipes();
-	return {
-		props: {
-			recipes,
-		},
-	};
 };
 
 export default RecipesPage;

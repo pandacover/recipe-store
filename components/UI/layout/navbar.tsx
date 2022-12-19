@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
-import { HiSun, HiMoon } from "react-icons/hi2";
-import { useSessionContext } from "../../../lib/session.context";
 import ActiveLink from "../active-link";
+import { useState, useEffect, useMemo } from "react";
+import { HiSun, HiMoon } from "react-icons/hi2";
+import SearchMenu from "../search-menu";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
-	const { session } = useSessionContext();
 	const [darkTheme, setDarkTheme] = useState(false);
+	const [toggleSearch, setToggleSearch] = useState(false);
+	const Router = useRouter();
+
+	const authRoutes = useMemo(() => ["/users/signin", "/users/signup"], []);
 
 	const onToggleTheme = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -21,6 +25,10 @@ export default function Navbar() {
 		localStorage.theme = darkTheme ? "light" : "dark";
 	};
 
+	const onToggleSearch = () => {
+		setToggleSearch(!toggleSearch);
+	};
+
 	useEffect(() => {
 		const theme = localStorage.theme as string | undefined;
 		if (theme && theme === "dark") {
@@ -28,14 +36,25 @@ export default function Navbar() {
 			document.body.classList.add("dark");
 		}
 	}, []);
+
 	return (
 		<>
 			<nav className='flex-[2] h-full flex items-center gap-6 text-[2.5vmin]'>
 				<ActiveLink href='/'>Home</ActiveLink>
 				<ActiveLink href='/recipes'>Recipes</ActiveLink>
-				<ActiveLink href='/recipes/create'>Add Recipes</ActiveLink>
+				{!authRoutes.includes(Router.asPath) && (
+					<ActiveLink href='/recipes/create'>Add Recipes</ActiveLink>
+				)}
 			</nav>
-			<div className='flex-1 h-full flex items-center justify-end select-none'>
+			<div className='flex-1 h-full flex items-center justify-end select-none gap-4'>
+				{!authRoutes.includes(Router.asPath) && (
+					<div>
+						<button className='text-[2.5vmin]' onClick={onToggleSearch}>
+							Search
+						</button>
+					</div>
+				)}
+
 				<div className='w-20 h-8 relative bg-transparent'>
 					<button
 						className='w-full h-full text-lg flex relative z-10 dark:text-white transition-colors duration-700'
@@ -51,6 +70,7 @@ export default function Navbar() {
 					<div className='w-10 h-8 rounded-l-2xl z-20 absolute top-0 left-0 bg-yellow-300 dark:bg-purple-700 theme-button' />
 				</div>
 			</div>
+			{toggleSearch && <SearchMenu setToggleMenu={setToggleSearch} />}
 		</>
 	);
 }

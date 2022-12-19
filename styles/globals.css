@@ -99,6 +99,10 @@
 	.dark .theme-button {
 		animation-direction: normal;
 	}
+
+	.no-scroll {
+		overflow: hidden;
+	}
 }
 
 @keyframes bridgeTransition {

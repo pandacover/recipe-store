@@ -1,8 +1,21 @@
 import Head from "next/head";
 import { getOneRecipe } from "../../lib/supabase";
-import type { GetServerSidePropsContext, NextPage } from "next";
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Spinner } from "../../components/UI";
 
-const RecipePage: NextPage<{ recipe: Recipe }> = ({ recipe }) => {
+const RecipePage: NextPage = () => {
+	const Router = useRouter();
+	const [recipe, setRecipe] = useState<Recipe | null>(null);
+
+	useEffect(() => {
+		getOneRecipe(Router.asPath.split("/")[2])
+			.then((data) => setRecipe(data[0]))
+			.catch((err) => console.error(err));
+	}, [Router]);
+
+	if (!recipe) return <Spinner />;
 	return (
 		<div className='w-full px-4 pt-4'>
 			<Head>
@@ -25,17 +38,6 @@ const RecipePage: NextPage<{ recipe: Recipe }> = ({ recipe }) => {
 			</div>
 		</div>
 	);
-};
-
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-	const { req, res } = ctx;
-	const id = req.url?.split("/")[2] as string;
-	const data = await getOneRecipe(id);
-	return {
-		props: {
-			recipe: data[0],
-		},
-	};
 };
 
 export default RecipePage;
