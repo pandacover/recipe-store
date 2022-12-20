@@ -36,7 +36,7 @@ const RecipesPage: NextPage = () => {
 					<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 				</Head>
 
-				<div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 h-full px-4 gap-4'>
+				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-full px-4 gap-4'>
 					{recipes &&
 						recipes.map(({ name, id, created_at, author }) => (
 							<Link
@@ -49,7 +49,8 @@ const RecipesPage: NextPage = () => {
 										src='/assets/recipe-fallback.svg'
 										alt='Recipe Image'
 										className='px-2'
-										fill={true}
+										width={400}
+										height={400}
 									/>
 								</div>
 								<div className='relative z-20 p-2 bg-gray-100/70 dark:bg-black2/50 backdrop-blur w-full h-full flex flex-col justify-end gap-2'>
@@ -60,7 +61,7 @@ const RecipesPage: NextPage = () => {
 										{name}
 									</div>
 									<div className='capitalize font-medium' title={author}>
-										Chef {author}
+										Chef {author.split("@")[0]}
 									</div>
 									<div className='text-sm' title={created_at}>
 										{new Date(created_at).toLocaleDateString(

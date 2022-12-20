@@ -1,14 +1,17 @@
-import { useState } from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { Spinner } from "../../components/UI";
-import { createRecipe } from "../../lib/supabase";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Spinner } from "../../../components/UI";
 import type { FormEvent, ChangeEvent } from "react";
-import { useSessionContext } from "../../lib/session.context";
+import { useSessionContext } from "../../../lib/session.context";
+import { updateRecipe, getOneRecipe } from "../../../lib/supabase";
 
-const CreatePage: NextPage = () => {
+const UpdatePage: NextPage = () => {
+	const Router = useRouter();
 	const { session } = useSessionContext();
 	const [recipe, setRecipe] = useState({
+		id: "",
 		name: "",
 		content: "",
 		tags: [] as string[],
@@ -20,7 +23,7 @@ const CreatePage: NextPage = () => {
 		e.preventDefault();
 		if (!session) return;
 		setLoading(true);
-		createRecipe({
+		updateRecipe({
 			...recipe,
 			author: session.user?.email || "",
 		})
@@ -28,6 +31,17 @@ const CreatePage: NextPage = () => {
 			.catch((err) => console.error(err))
 			.finally(() => setLoading(false));
 	};
+
+	useEffect(() => {
+		const id = Router.asPath.split("/")[3];
+		if (id === "[id]") return;
+		getOneRecipe(id)
+			.then((data: Recipe[]) => {
+				const { created_at, ...rest } = data[0];
+				setRecipe({ ...rest });
+			})
+			.catch((error) => console.error(error));
+	}, [Router]);
 
 	const handleChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -41,10 +55,12 @@ const CreatePage: NextPage = () => {
 			});
 	};
 
+	if (!recipe.id) return <Spinner />;
+
 	return (
 		<>
 			<Head>
-				<title>Recipe Store | Create Recipe</title>
+				<title>Recipe Store | Update Recipe</title>
 				<meta
 					name='description'
 					content={`Create the recipe for Recipe Store.`}
@@ -52,7 +68,7 @@ const CreatePage: NextPage = () => {
 				<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 			</Head>
 			<div className='flex h-11 mb-4 items-center justify-center font-semibold text-2xl'>
-				🍚 Note your recipe down 🍳
+				🍚 Update Your Recipe 🍳
 			</div>
 			<form
 				className='w-full min-h-screen px-6 grid create-grid-form gap-2'
@@ -70,6 +86,7 @@ const CreatePage: NextPage = () => {
 						className='w-full h-full form-input'
 						placeholder='recipe name'
 						onChange={handleChange}
+						value={recipe.name}
 						disabled={loading}
 					/>
 				</div>
@@ -84,6 +101,7 @@ const CreatePage: NextPage = () => {
 						title='recipe tags'
 						className='w-full h-full form-input'
 						placeholder='tags seperated by space'
+						value={recipe.tags.join(" ")}
 						onChange={handleChange}
 						disabled={loading}
 					/>
@@ -99,6 +117,7 @@ const CreatePage: NextPage = () => {
 						className='w-full h-full form-input resize-none'
 						placeholder='Recipe Here...'
 						onChange={handleChange}
+						value={recipe.content}
 						disabled={loading}
 					/>
 				</div>
@@ -109,7 +128,7 @@ const CreatePage: NextPage = () => {
 						disabled={loading}
 						title='Submit Recipe'
 					>
-						{loading ? <Spinner /> : "Submit Recipe"}
+						{loading ? <Spinner /> : "Update Recipe"}
 					</button>
 				</div>
 			</form>
@@ -117,4 +136,4 @@ const CreatePage: NextPage = () => {
 	);
 };
 
-export default CreatePage;
+export default UpdatePage;

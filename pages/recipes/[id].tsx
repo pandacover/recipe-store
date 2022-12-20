@@ -1,16 +1,18 @@
 import Head from "next/head";
-import { getOneRecipe } from "../../lib/supabase";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Spinner } from "../../components/UI";
+import { getOneRecipe } from "../../lib/supabase";
 
 const RecipePage: NextPage = () => {
 	const Router = useRouter();
 	const [recipe, setRecipe] = useState<Recipe | null>(null);
 
 	useEffect(() => {
-		getOneRecipe(Router.asPath.split("/")[2])
+		const id = Router.asPath.split("/")[2];
+		if (id === "[id]") return;
+		getOneRecipe(id)
 			.then((data) => setRecipe(data[0]))
 			.catch((err) => console.error(err));
 	}, [Router]);

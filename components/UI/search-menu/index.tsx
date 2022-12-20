@@ -50,6 +50,7 @@ export default function SearchMenu({
 			<div className='overflow-y-scroll pb-2 flex flex-col gap-2 mt-12 h-72 max-h-[18rem] w-11/12 lg:w-7/12 relative rounded-md bg-white dark:bg-black2'>
 				<div className='w-full basis-11 text-sm font-medium rounded-t-md'>
 					<input
+						autoFocus={true}
 						type='text'
 						id='search-params'
 						name='search-params'
@@ -71,6 +72,7 @@ export default function SearchMenu({
 					{filtered && filtered.length > 0 ? (
 						filtered.map(({ id, name }, idx) => (
 							<Link
+								tabIndex={idx}
 								href={`/recipes/${id}`}
 								key={id}
 								className='flex justify-between items-center w-full px-2 py-3 rounded-md bg-sky-500 dark:bg-sky-700 dark:text-gray-300 text-white text-sm'

@@ -41,4 +41,17 @@ export const getOneRecipe = async (id: string) => {
 	return data;
 };
 
+export const updateRecipe = async (recipe: Omit<Recipe, "created_at">) => {
+	const { error } = await supabase
+		.from("recipes")
+		.update(recipe)
+		.eq("id", recipe.id);
+	if (error) throw error;
+};
+
+export const deleteRecipe = async (id: string) => {
+	const { error } = await supabase.from("recipes").delete().eq("id", id);
+	if (error) throw error;
+};
+
 export default supabase;

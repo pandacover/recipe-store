@@ -1,13 +1,15 @@
 import ActiveLink from "../active-link";
-import { useState, useEffect, useMemo } from "react";
-import { HiSun, HiMoon } from "react-icons/hi2";
 import SearchMenu from "../search-menu";
 import { useRouter } from "next/router";
+import { HiSun, HiMoon } from "react-icons/hi2";
+import { useState, useEffect, useMemo } from "react";
+import { useSessionContext } from "../../../lib/session.context";
 
 export default function Navbar() {
+	const Router = useRouter();
+	const { session } = useSessionContext();
 	const [darkTheme, setDarkTheme] = useState(false);
 	const [toggleSearch, setToggleSearch] = useState(false);
-	const Router = useRouter();
 
 	const authRoutes = useMemo(() => ["/users/signin", "/users/signup"], []);
 
@@ -44,6 +46,12 @@ export default function Navbar() {
 				<ActiveLink href='/recipes'>Recipes</ActiveLink>
 				{!authRoutes.includes(Router.asPath) && (
 					<ActiveLink href='/recipes/create'>Add Recipes</ActiveLink>
+				)}
+
+				{session && (
+					<ActiveLink href={`/users/profile/${session.user.id}`}>
+						Profile
+					</ActiveLink>
 				)}
 			</nav>
 			<div className='flex-1 h-full flex items-center justify-end select-none gap-4'>

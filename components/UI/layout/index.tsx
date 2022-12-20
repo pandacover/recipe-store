@@ -1,6 +1,6 @@
 import Router from "next/router";
 import Spinner from "../spinner";
-import supabase from "../../../lib/supabase";
+import supabase, { getRecipes } from "../../../lib/supabase";
 import { Session } from "@supabase/supabase-js";
 import { RiHeartFill } from "react-icons/ri";
 import { ReactNode, useState, useEffect, useMemo } from "react";
@@ -16,7 +16,7 @@ export default function Layout({ children }: componentProps) {
 	return (
 		<SessionProvider>
 			<RecipeProvider>
-				<div className='max-w-[1368px] w-screen min-h-screen mx-auto relative flex flex-col pb-16 dark:bg-black1 dark:text-gray-200'>
+				<div className='max-w-[1368px] min-h-screen mx-auto relative flex flex-col pb-16 dark:bg-black1 dark:text-gray-200'>
 					<header className='basis-[4rem] px-4 flex items-center'>
 						<Navbar />
 					</header>
@@ -66,6 +66,15 @@ const SessionProvider = ({ children }: componentProps) => {
 
 const RecipeProvider = ({ children }: componentProps) => {
 	const [recipes, setRecipes] = useState<Recipe[] | null>(null);
+
+	useEffect(() => {
+		getRecipes()
+			.then((data) => setRecipes(data))
+			.catch((err) => console.error(err));
+	}, []);
+
+	if (!recipes) <Spinner />;
+
 	return (
 		<RecipeContext.Provider value={{ recipes, setRecipes }}>
 			{children}
