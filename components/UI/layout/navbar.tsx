@@ -1,9 +1,10 @@
 import ActiveLink from "../active-link";
 import SearchMenu from "../search-menu";
 import { useRouter } from "next/router";
-import { HiSun, HiMoon } from "react-icons/hi2";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useSessionContext } from "../../../lib/session.context";
+import DesktopMenu from "./utility-menu/desk-menu";
+import MobileMenu from "./utility-menu/mob-menu";
 
 export default function Navbar() {
 	const Router = useRouter();
@@ -11,10 +12,10 @@ export default function Navbar() {
 	const [darkTheme, setDarkTheme] = useState(false);
 	const [toggleSearch, setToggleSearch] = useState(false);
 
-	const authRoutes = useMemo(() => ["/users/signin", "/users/signup"], []);
-
 	const onToggleTheme = (
-		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+		e:
+			| React.MouseEvent<HTMLButtonElement, MouseEvent>
+			| React.ChangeEvent<HTMLSelectElement>
 	) => {
 		const themeButton = document.querySelector<HTMLElement>(".theme-button");
 		if (!themeButton) return;
@@ -41,43 +42,20 @@ export default function Navbar() {
 
 	return (
 		<>
-			<nav className='flex-[2] h-full flex items-center gap-6 text-[2.5vmin]'>
+			<nav className='flex-1 h-full flex items-center gap-6 text-[2.5vmin]'>
 				<ActiveLink href='/'>Home</ActiveLink>
 				<ActiveLink href='/recipes'>Recipes</ActiveLink>
-				{!authRoutes.includes(Router.asPath) && (
-					<ActiveLink href='/recipes/create'>Add Recipes</ActiveLink>
-				)}
-
-				{session && (
-					<ActiveLink href={`/users/profile/${session.user.id}`}>
-						Profile
-					</ActiveLink>
-				)}
+				<ActiveLink href='/recipes/create'>Add Recipe</ActiveLink>
 			</nav>
-			<div className='flex-1 h-full flex items-center justify-end select-none gap-4'>
-				{!authRoutes.includes(Router.asPath) && Router.asPath !== "/" && (
-					<div>
-						<button className='text-[2.5vmin]' onClick={onToggleSearch}>
-							Search
-						</button>
-					</div>
-				)}
-
-				<div className='w-20 h-8 relative bg-transparent'>
-					<button
-						className='w-full h-full text-lg flex relative z-10 dark:text-white transition-colors duration-700'
-						onClick={onToggleTheme}
-					>
-						<div className='flex-1 h-full flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-l-2xl transition-colors duration-500'>
-							<HiMoon />
-						</div>
-						<div className='text-xl flex-1 h-full w-full flex items-center justify-center bg-gray-300 dark:bg-transparent rounded-r-2xl transition-colors duration-500'>
-							<HiSun />
-						</div>
-					</button>
-					<div className='w-10 h-8 rounded-l-2xl z-20 absolute top-0 left-0 bg-yellow-300 dark:bg-purple-700 theme-button' />
-				</div>
-			</div>
+			<DesktopMenu
+				onToggleSearch={onToggleSearch}
+				onToggleTheme={onToggleTheme}
+			/>
+			<MobileMenu
+				onToggleSearch={onToggleSearch}
+				onToggleTheme={onToggleTheme}
+				darkTheme={darkTheme}
+			/>
 			{toggleSearch && <SearchMenu setToggleMenu={setToggleSearch} />}
 		</>
 	);
