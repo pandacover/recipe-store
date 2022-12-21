@@ -26,7 +26,9 @@ export default function DesktopMenu({
 			)}
 			{!authRoutes.includes(Router.asPath) && Router.asPath !== "/" && (
 				<div>
-					<button onClick={onToggleSearch}>Search</button>
+					<button onClick={onToggleSearch} data-type='desktop'>
+						Search
+					</button>
 				</div>
 			)}
 			<div className='w-20 h-8 relative bg-transparent'>

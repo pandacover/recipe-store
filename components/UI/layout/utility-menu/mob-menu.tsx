@@ -1,6 +1,6 @@
 import { ActiveLink } from "../../";
 import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MdOutlineClose as MdClose } from "react-icons/md";
 import { HiChevronDown as HiDown, HiMoon, HiSun } from "react-icons/hi2";
 import { HiBars3BottomRight as HiBars } from "react-icons/hi2";
@@ -25,7 +25,6 @@ export default function MobileMenu({
 	const { session } = useSessionContext();
 	const [isMenuOpen, setMenuOpen] = useState(false);
 	const authRoutes = useMemo(() => ["/users/signin", "/users/signup"], []);
-
 	return (
 		<div className='flex md:hidden flex-1 h-full relative justify-end items-center text-[2.5vmin]'>
 			<button
@@ -62,11 +61,16 @@ export default function MobileMenu({
 								{darkTheme ? <HiMoon /> : <HiSun />}
 							</span>
 							<select
-								className='appearance-none dark:text-white dark:bg-black4 absolute left-0 top-0 w-full h-full bg-transparent text-center font-medium text-black'
+								className='appearance-none absolute left-0 top-0 w-full h-full bg-transparent text-center font-medium'
 								onChange={onToggleTheme}
+								value={darkTheme ? "dark" : "true"}
 							>
-								<option value='light'>Light</option>
-								<option value='dark'>Dark</option>
+								<option value='light' className='dark:text-black'>
+									Light
+								</option>
+								<option value='dark' className='dark:text-black'>
+									Dark
+								</option>
 							</select>
 							<span className='text-sm'>
 								<HiDown />

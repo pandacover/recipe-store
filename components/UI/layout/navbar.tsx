@@ -1,14 +1,10 @@
 import ActiveLink from "../active-link";
 import SearchMenu from "../search-menu";
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { useSessionContext } from "../../../lib/session.context";
 import DesktopMenu from "./utility-menu/desk-menu";
 import MobileMenu from "./utility-menu/mob-menu";
 
 export default function Navbar() {
-	const Router = useRouter();
-	const { session } = useSessionContext();
 	const [darkTheme, setDarkTheme] = useState(false);
 	const [toggleSearch, setToggleSearch] = useState(false);
 
@@ -22,8 +18,8 @@ export default function Navbar() {
 
 		themeButton.style.animation = "none";
 		setTimeout(() => (themeButton.style.animation = ""), 10);
-
-		setDarkTheme(!darkTheme);
+		if (e.currentTarget.type === "submit") setDarkTheme(!darkTheme);
+		else setDarkTheme(e.currentTarget.value === "light" ? false : true);
 		document.body.classList.toggle("dark");
 		localStorage.theme = darkTheme ? "light" : "dark";
 	};
