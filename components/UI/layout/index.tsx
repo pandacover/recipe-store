@@ -16,11 +16,13 @@ export default function Layout({ children }: componentProps) {
 	return (
 		<SessionProvider>
 			<RecipeProvider>
-				<div className='max-w-[1368px] min-h-screen mx-auto relative flex flex-col pb-16 dark:bg-black1 dark:text-gray-200'>
+				<div className='max-w-[1368px] min-h-screen h-fit mx-auto relative flex flex-col pb-16 dark:bg-black1 dark:text-gray-200'>
 					<header className='basis-[4rem] px-4 flex items-center'>
 						<Navbar />
 					</header>
-					<main className='w-full relative flex-auto'>{children}</main>
+					<main className='w-full relative flex-auto overflow-y-scroll'>
+						{children}
+					</main>
 					<footer className='absolute bottom-4 left-0 w-full px-2 flex items-center justify-center h-4'>
 						Made with
 						<span className='mx-2 text-red-600'>

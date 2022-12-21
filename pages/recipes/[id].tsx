@@ -38,6 +38,9 @@ const RecipePage: NextPage = () => {
 					{recipe.content}
 				</pre>
 			</div>
+			<div className='mt-6 text-right capitalize'>
+				- Chef {recipe.author.split("@")[0]}
+			</div>
 		</div>
 	);
 };

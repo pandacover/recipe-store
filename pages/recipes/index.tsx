@@ -25,8 +25,8 @@ const RecipesPage: NextPage = () => {
 	if (!recipes) return <Spinner />;
 
 	return (
-		<div className='absolute left-0 top-0 w-full h-full'>
-			<div className='relative w-full h-full'>
+		<div className='absolute left-0 top-0 w-full h-fit'>
+			<div className='relative w-full h-fit-content'>
 				<Head>
 					<title>Recipe Store | Recipes</title>
 					<meta
@@ -36,7 +36,7 @@ const RecipesPage: NextPage = () => {
 					<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 				</Head>
 
-				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-full px-4 gap-4'>
+				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-4 gap-4 h-fit'>
 					{recipes &&
 						recipes.map(({ name, id, created_at, author }) => (
 							<Link

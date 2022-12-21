@@ -6,7 +6,7 @@
 
 @layer base {
 	body {
-		@apply bg-gray-50 font-Quicksand overflow-x-hidden;
+		@apply bg-gray-50 font-Quicksand overflow-x-hidden h-full w-full;
 	}
 
 	body::-webkit-scrollbar {
