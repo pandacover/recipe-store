@@ -1,12 +1,12 @@
+import Navbar from "./navbar";
 import Router from "next/router";
 import Spinner from "../spinner";
-import supabase, { getRecipes } from "../../../lib/supabase";
-import { Session } from "@supabase/supabase-js";
 import { RiHeartFill } from "react-icons/ri";
-import { ReactNode, useState, useEffect, useMemo } from "react";
-import { SessionContext } from "../../../lib/session.context";
-import Navbar from "./navbar";
+import { Session } from "@supabase/supabase-js";
 import { RecipeContext } from "../../../lib/recipe.context";
+import supabase, { getRecipes } from "../../../lib/supabase";
+import { SessionContext } from "../../../lib/session.context";
+import { ReactNode, useState, useEffect, useMemo } from "react";
 
 type componentProps = {
 	children: ReactNode;

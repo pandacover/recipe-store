@@ -1,6 +1,6 @@
 import { ActiveLink } from "../../";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { MdOutlineClose as MdClose } from "react-icons/md";
 import { HiChevronDown as HiDown, HiMoon, HiSun } from "react-icons/hi2";
 import { HiBars3BottomRight as HiBars } from "react-icons/hi2";
@@ -56,7 +56,7 @@ export default function MobileMenu({
 					)}
 					<div className='w-full flex justify-between items-center pt-6'>
 						<div className='font-light'>Switch Theme</div>
-						<div className='w-28 h-11 relative flex items-center justify-between px-2 border-2 rounded-md'>
+						<div className='w-28 h-11 relative flex items-center justify-between px-2 border-2 dark:border-black rounded-md'>
 							<span className='text-lg'>
 								{darkTheme ? <HiMoon /> : <HiSun />}
 							</span>
