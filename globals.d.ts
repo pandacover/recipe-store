@@ -8,5 +8,6 @@ declare global {
 		content: string;
 		author: string;
 		tags: string[];
+		likes: string[];
 	}
 }

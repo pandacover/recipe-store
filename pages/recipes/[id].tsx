@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Spinner } from "../../components/UI";
 import { getOneRecipe } from "../../lib/supabase";
+import Heart from "../../components/UI/heart";
 
 const RecipePage: NextPage = () => {
 	const Router = useRouter();
@@ -25,7 +26,12 @@ const RecipePage: NextPage = () => {
 				<meta name='description' content={recipe.content} />
 				<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 			</Head>
-			<div className='text-2xl font-bold text-sky-600 mb-2'>{recipe.name}</div>
+			<div className='flex gap-6 mb-2 min-h-[3rem] items-center'>
+				<div className='text-2xl font-bold text-sky-600'>{recipe.name}</div>
+				<div className='pt-2'>
+					<Heart recipe={recipe} />
+				</div>
+			</div>
 			<div className='flex gap-2 mb-6'>
 				{recipe.tags.map((tag, idx) => (
 					<span key={`${recipe.id}-tag-${idx}`} className='tags'>

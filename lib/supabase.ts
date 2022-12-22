@@ -1,5 +1,5 @@
 import { supaConfig } from "./config";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, PostgrestResponse } from "@supabase/supabase-js";
 
 const supabase = createClient(supaConfig.url, supaConfig.key);
 
@@ -19,7 +19,7 @@ export const signIn = async (email: string, password: string) => {
 };
 
 export const createRecipe = async (
-	recipe: Omit<Recipe, "id" | "created_at">
+	recipe: Omit<Recipe, "id" | "created_at" | "likes">
 ) => {
 	const { data, error } = await supabase.from("recipes").insert({ ...recipe });
 	if (error) throw error;
@@ -41,7 +41,7 @@ export const getOneRecipe = async (id: string) => {
 	return data;
 };
 
-export const updateRecipe = async (recipe: Omit<Recipe, "created_at">) => {
+export const updateRecipe = async (recipe: Partial<Recipe>) => {
 	const { error } = await supabase
 		.from("recipes")
 		.update(recipe)
@@ -52,6 +52,24 @@ export const updateRecipe = async (recipe: Omit<Recipe, "created_at">) => {
 export const deleteRecipe = async (id: string) => {
 	const { error } = await supabase.from("recipes").delete().eq("id", id);
 	if (error) throw error;
+};
+
+// utilities
+
+export const likeRecipe = async (recipe: Partial<Recipe>, email: string) => {
+	if (recipe.likes) {
+		if (recipe.likes.includes(email))
+			recipe.likes = recipe.likes.filter((item) => item !== email);
+		else recipe.likes.push(email);
+	} else {
+		recipe.likes = [email];
+	}
+
+	try {
+		await updateRecipe(recipe);
+	} catch (error) {
+		throw error;
+	}
 };
 
 export default supabase;
