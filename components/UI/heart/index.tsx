@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { HiHeart, HiOutlineHeart } from "react-icons/hi2";
-import { useRecipeContext } from "../../../lib/recipe.context";
-import { useSessionContext } from "../../../lib/session.context";
 import { likeRecipe } from "../../../lib/supabase";
+import { HiHeart, HiOutlineHeart } from "react-icons/hi2";
+import { useSessionContext } from "../../../lib/session.context";
 
 export default function Heart({ recipe }: { recipe: Recipe }) {
 	const [isLiked, setIsLiked] = useState(false);

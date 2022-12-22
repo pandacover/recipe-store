@@ -51,6 +51,10 @@
 		@apply flex gap-2 items-center justify-center text-sm;
 	}
 
+	.primary-btn {
+		@apply flex items-center justify-center w-[20vmin] py-2 rounded-3xl;
+	}
+
 	.text-wrap-3 {
 		@apply text-ellipsis overflow-hidden leading-7 max-h-[5.25rem];
 		display: -webkit-box;

@@ -10,16 +10,16 @@ const HomePage: NextPage = () => {
 				<div className='text-[2.8vmin]'>
 					Join our community, share your recipes and learn some from others! :D
 				</div>
-				<div className='mt-6 flex flex-wrap gap-4'>
+				<div className='mt-6 flex flex-wrap md:fap-4 gap-2 text-[3vmin]'>
 					<Link
 						href='/users/signup'
-						className='bg-sky-500 dark:bg-sky-700 w-32 py-2 text-white flex items-center justify-center rounded-3xl'
+						className='primary-btn bg-sky-500 dark:bg-sky-700'
 					>
 						Get Started
 					</Link>
 					<Link
 						href='/recipes'
-						className='w-32 py-2 border border-sky-500 dark:border-sky-700 text-sky-500 dark:text-sky-700 flex items-center justify-center rounded-3xl'
+						className='primary-btn border border-sky-500 dark:border-sky-700'
 					>
 						Explore
 					</Link>
