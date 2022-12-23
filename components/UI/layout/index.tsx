@@ -16,14 +16,14 @@ export default function Layout({ children }: componentProps) {
 	return (
 		<SessionProvider>
 			<RecipeProvider>
-				<div className='max-w-[1368px] min-h-screen h-fit mx-auto relative flex flex-col pb-16 dark:bg-black1 dark:text-gray-200'>
-					<header className='basis-[4rem] px-4 flex items-center'>
+				<div className='relative max-w-[1368px] w-screen mx-auto min-h-screen dark:text-gray-200 flex flex-col'>
+					<header className='h-16 px-4 flex items-center'>
 						<Navbar />
 					</header>
-					<main className='w-full relative flex-auto overflow-y-scroll'>
+					<main className='relative w-full min-h-[calc(100vh-6.75rem)]'>
 						{children}
 					</main>
-					<footer className='absolute bottom-4 left-0 w-full px-2 flex items-center justify-center h-4'>
+					<footer className='w-full px-2 flex items-center justify-center h-11 mt-auto'>
 						Made with
 						<span className='mx-2 text-red-600'>
 							<RiHeartFill />

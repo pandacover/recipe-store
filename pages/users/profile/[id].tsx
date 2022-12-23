@@ -34,7 +34,7 @@ const ProfilePage: NextPage = () => {
 					.map((recipe) => (
 						<div
 							key={recipe.id}
-							className='flex flex-col px-3 py-2 shadow-md shadow-gray-200 dark:shadow-black'
+							className='flex flex-col px-3 py-2 bg-gray-100 dark:bg-black2 border border-gray-300 dark:border-black3 rounded-md'
 						>
 							<div>{recipe.name}</div>
 							<div className='mt-2 flex gap-4'>
@@ -70,7 +70,7 @@ const ProfilePage: NextPage = () => {
 					.map((recipe) => (
 						<div
 							key={recipe.id}
-							className='flex flex-col px-3 py-2 shadow-md shadow-gray-200 dark:shadow-black'
+							className='flex flex-col px-3 py-2 bg-gray-100 dark:bg-black2 border border-gray-300 dark:border-black3 rounded-md'
 						>
 							<div>{recipe.name}</div>
 							<div className='mt-4 flex items-center'>
