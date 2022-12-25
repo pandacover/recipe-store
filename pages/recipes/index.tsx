@@ -42,7 +42,7 @@ const RecipesPage: NextPage = () => {
 							key={recipe.id}
 							className='w-full aspect-square p-2 bg-white dark:bg-black2 relative border dark:border-black5 rounded-3xl'
 						>
-							<figure className='relative w-full h-[60%] bg-blue-600 rounded-3xl'>
+							<figure className='relative w-full h-[60%] bg-sky-600 dark:bg-sky-700 rounded-3xl'>
 								<Image
 									src='/assets/recipe-fallback.svg'
 									alt='two people cooking'
