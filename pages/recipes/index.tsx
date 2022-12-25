@@ -33,7 +33,7 @@ const RecipesPage: NextPage = () => {
 				<meta httpEquiv='Content-Type' content='text/html;charset=UTF-8' />
 			</Head>
 
-			<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-4 gap-6 h-fit'>
+			<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-4 gap-6 h-fit'>
 				{recipes &&
 					recipes.map(({ name, id, created_at, author, likes, content }) => (
 						<Link href={`/recipes/${id}`} key={id} className='card-container'>
