@@ -3,7 +3,13 @@ import { likeRecipe } from "../../../lib/supabase";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi2";
 import { useSessionContext } from "../../../lib/session.context";
 
-export default function Heart({ recipe }: { recipe: Recipe }) {
+export default function Heart({
+	recipe,
+	className = "",
+}: {
+	recipe: Recipe;
+	className?: string;
+}) {
 	const [isLiked, setIsLiked] = useState(false);
 	const [isBeingLiked, setIsBeingLiked] = useState(false);
 	const { session } = useSessionContext();
@@ -29,9 +35,9 @@ export default function Heart({ recipe }: { recipe: Recipe }) {
 	};
 
 	return (
-		<div className='text-lg text-red-600'>
+		<div className={`${className ? className : "text-lg"} text-red-600`}>
 			{!isLiked ? (
-				<button className='' onClick={onLiked}>
+				<button onClick={onLiked}>
 					<HiOutlineHeart />
 				</button>
 			) : isBeingLiked ? (
@@ -39,7 +45,7 @@ export default function Heart({ recipe }: { recipe: Recipe }) {
 					<HiHeart />
 				</button>
 			) : (
-				<button className='' onClick={onLiked}>
+				<button onClick={onLiked}>
 					<HiHeart />
 				</button>
 			)}
